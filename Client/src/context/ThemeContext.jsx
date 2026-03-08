@@ -8,27 +8,21 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  // Check if user has a theme preference in localStorage
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark" ? true : false;
-  });
-
-  // Update localStorage when theme changes
-  useEffect(() => {
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-
-    // Apply theme class to body
-    if (isDarkMode) {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
-  }, [isDarkMode]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
   };
+
+  useEffect(() => {
+    console.log("Theme changed to:", isDarkMode ? "dark" : "light");
+
+    if (isDarkMode) {
+      document.body.setAttribute("data-theme", "dark");
+    } else {
+      document.body.setAttribute("data-theme", "light");
+    }
+  }, [isDarkMode]);
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
