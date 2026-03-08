@@ -2,7 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-
+const authRoutes = require("./routes/authRoutes");  
 // Import routes
 const leadRoutes = require("./routes/leadRoutes");
 
@@ -19,6 +19,8 @@ app.get("/test", (req, res) => {
 });
 
 // Use routes
+app.use("/api/auth", authRoutes); // NEW - Authentication routes
+
 app.use("/api/leads", leadRoutes);
 
 // 404 handler for routes that don't exist - FIXED: removed the "*"

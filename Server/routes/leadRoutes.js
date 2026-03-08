@@ -8,14 +8,18 @@ const {
   updateLead,
   deleteLead,
 } = require("../controllers/leadController");
+const { protect } = require("../middleware/authMiddleware"); // NEW
 
-// POST   /api/leads     - Create new lead
-// GET    /api/leads     - Get all leads
-router.route("/").post(createLead).get(getLeads);
+// All routes now require authentication
+router
+  .route("/")
+  .post(protect, createLead) // Protected
+  .get(protect, getLeads); // Protected
 
-// GET    /api/leads/:id - Get single lead
-// PUT    /api/leads/:id - Update lead
-// DELETE /api/leads/:id - Delete lead
-router.route("/:id").get(getLead).put(updateLead).delete(deleteLead);
+router
+  .route("/:id")
+  .get(protect, getLead) // Protected
+  .put(protect, updateLead) // Protected
+  .delete(protect, deleteLead); // Protected
 
 module.exports = router;
