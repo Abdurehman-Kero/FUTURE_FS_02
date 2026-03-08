@@ -496,3 +496,125 @@ body {
     font-size: 0.8rem;
   }
 }
+/* Add to src/styles/App.module.css */
+
+/* Welcome text */
+.welcomeText {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+/* Header actions */
+.headerActions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Admin button */
+.adminBtn {
+    background: #9b59b6;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.adminBtn:hover {
+    background: #8e44ad;
+}
+
+/* Password requirements */
+.passwordRequirements {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.passwordRequirements p {
+    margin: 0.25rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.passwordRequirements p::before {
+    position: absolute;
+    left: 0;
+}
+
+.valid {
+    color: #27ae60;
+}
+
+.valid::before {
+    content: '✓';
+}
+
+.invalid {
+    color: #e74c3c;
+}
+
+.invalid::before {
+    content: '✗';
+}
+
+/* Admin form */
+.adminForm {
+    margin-top: 1.5rem;
+}
+
+/* Success message */
+.successMessage {
+    background: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.successMessage button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #155724;
+}
+
+/* Modal improvements */
+.modalContent {
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modalContent h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .headerActions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .adminBtn, .addBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}
