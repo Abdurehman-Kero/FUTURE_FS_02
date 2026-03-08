@@ -84,7 +84,7 @@ const HomePage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                placeholder="John Doe"
+                placeholder="numi kero"
               />
             </div>
 
@@ -96,7 +96,7 @@ const HomePage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="john@example.com"
+                placeholder="numi@example.com"
               />
             </div>
 
@@ -107,7 +107,7 @@ const HomePage = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="555-0123"
+                placeholder="+25198231..."
               />
             </div>
 
