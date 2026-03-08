@@ -1,4 +1,4 @@
-// routes/authRoutes.js
+// Server/routes/authRoutes.js
 const express = require("express");
 const router = express.Router();
 const {
@@ -13,17 +13,19 @@ const {
   handleValidationErrors,
 } = require("../middleware/validationMiddleware");
 
-// Public routes with validation
-router.post(
-  "/register",
-  validateRegister, // This validates the input
-  handleValidationErrors, // This checks for errors
-  registerAdmin, // This runs ONLY if validation passes
-);
-
+// PUBLIC route - only login is public
 router.post("/login", validateLogin, handleValidationErrors, loginAdmin);
 
-// Protected route
+// PROTECTED routes - only existing admins can create new admins
+router.post(
+  "/register",
+  protect,
+  validateRegister,
+  handleValidationErrors,
+  registerAdmin,
+);
+
+// PROTECTED route - get current user profile
 router.get("/me", protect, getMe);
 
 module.exports = router;
