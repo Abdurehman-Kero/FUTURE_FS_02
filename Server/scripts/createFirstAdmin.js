@@ -15,8 +15,8 @@ async function createFirstAdmin() {
   // You can change these credentials
   const adminData = {
     name: "Super Admin",
-    email: "admin@crm.com",
-    password: "Admin123!",
+    email: "keroabdurehman@gmail.com",
+    password: "abdurehman@0974",
   };
 
   // Hash password
