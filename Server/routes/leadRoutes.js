@@ -8,18 +8,22 @@ const {
   updateLead,
   deleteLead,
 } = require("../controllers/leadController");
-const { protect } = require("../middleware/authMiddleware"); // NEW
+const { protect } = require("../middleware/authMiddleware");
+const {
+  validateLead,
+  handleValidationErrors,
+} = require("../middleware/validationMiddleware");
 
-// All routes now require authentication
+// All routes require authentication
 router
   .route("/")
-  .post(protect, createLead) // Protected
-  .get(protect, getLeads); // Protected
+  .post(protect, validateLead, handleValidationErrors, createLead)
+  .get(protect, getLeads);
 
 router
   .route("/:id")
-  .get(protect, getLead) // Protected
-  .put(protect, updateLead) // Protected
-  .delete(protect, deleteLead); // Protected
+  .get(protect, getLead)
+  .put(protect, validateLead, handleValidationErrors, updateLead)
+  .delete(protect, deleteLead);
 
 module.exports = router;
