@@ -14,16 +14,13 @@ const {
   handleValidationErrors,
 } = require("../middleware/validationMiddleware");
 
-// All routes require authentication
-router
-  .route("/")
-  .post(protect, validateLead, handleValidationErrors, createLead)
-  .get(protect, getLeads);
+// PUBLIC route - anyone can create a lead (contact form)
+router.post("/", validateLead, handleValidationErrors, createLead);
 
-router
-  .route("/:id")
-  .get(protect, getLead)
-  .put(protect, validateLead, handleValidationErrors, updateLead)
-  .delete(protect, deleteLead);
+// PROTECTED routes - only admins can access these
+router.get("/", protect, getLeads);
+router.get("/:id", protect, getLead);
+router.put("/:id", protect, validateLead, handleValidationErrors, updateLead);
+router.delete("/:id", protect, deleteLead);
 
 module.exports = router;
