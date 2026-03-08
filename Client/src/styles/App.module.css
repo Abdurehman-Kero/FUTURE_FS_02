@@ -975,3 +975,221 @@ body {
 .border-left-red {
   border-left: 4px solid var(--primary-red);
 }
+/* ======================================== */
+/* THEME TOGGLE */
+/* ======================================== */
+
+.themeToggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggleTrack {
+  width: 3rem;
+  height: 1.5rem;
+  background: var(--gray-300);
+  border-radius: var(--radius-full);
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.dark-mode .toggleTrack {
+  background: var(--deep-burgundy);
+}
+
+.toggleThumb {
+  width: 1.2rem;
+  height: 1.2rem;
+  background: var(--white);
+  border-radius: 50%;
+  position: absolute;
+  top: 0.15rem;
+  left: 0.15rem;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.toggleThumbDark {
+  transform: translateX(1.5rem);
+  background: var(--primary-purple);
+}
+
+.navHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ======================================== */
+/* DARK MODE VARIABLES */
+/* ======================================== */
+
+.dark-mode {
+  --primary-purple: #B47AFF;
+  --primary-red: #FF4D7A;
+  --deep-burgundy: #1A0B0F;
+  
+  --white: #1E1E1E;
+  --light-bg: #121212;
+  --gray-100: #2A2A2A;
+  --gray-200: #333333;
+  --gray-300: #404040;
+  --gray-400: #4D4D4D;
+  --gray-500: #666666;
+  --gray-600: #999999;
+  --gray-700: #CCCCCC;
+  --gray-800: #E5E5E5;
+  --gray-900: #F5F5F5;
+  
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
+  --shadow-purple: 0 4px 12px rgba(151, 70, 255, 0.3);
+  --shadow-red: 0 4px 12px rgba(233, 22, 74, 0.3);
+}
+
+/* Dark mode specific overrides */
+.dark-mode body {
+  background: var(--light-bg);
+  color: var(--gray-800);
+}
+
+.dark-mode .navbar {
+  background: var(--white);
+  border-bottom-color: var(--gray-300);
+}
+
+.dark-mode .logo {
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark-mode .navLink {
+  color: var(--gray-600);
+}
+
+.dark-mode .navLink:hover {
+  color: var(--primary-purple);
+}
+
+.dark-mode .userEmail {
+  background: var(--gray-200);
+  color: var(--gray-700);
+  border-color: var(--gray-300);
+}
+
+.dark-mode .logoutBtn {
+  background: var(--white);
+  color: var(--primary-red);
+  border-color: var(--primary-red);
+}
+
+.dark-mode .logoutBtn:hover {
+  background: var(--primary-red);
+  color: var(--white);
+}
+
+.dark-mode .formContainer,
+.dark-mode .authCard,
+.dark-mode .statCard,
+.dark-mode .dashboardHeader,
+.dark-mode .tableContainer,
+.dark-mode .modalContent {
+  background: var(--white);
+  border-color: var(--gray-300);
+}
+
+.dark-mode .formGroup input,
+.dark-mode .formGroup select,
+.dark-mode .formGroup textarea {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+.dark-mode .formGroup label {
+  color: var(--gray-600);
+}
+
+.dark-mode .leadTable th {
+  background: var(--gray-200);
+  color: var(--gray-800);
+}
+
+.dark-mode .leadTable td {
+  color: var(--gray-700);
+  border-bottom-color: var(--gray-300);
+}
+
+.dark-mode .leadTable tbody tr:hover {
+  background: var(--gray-200);
+}
+
+.dark-mode .statusSelect {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border-color: var(--gray-300);
+}
+
+.dark-mode .editBtn {
+  background: var(--gray-100);
+  color: var(--primary-purple);
+  border-color: var(--primary-purple);
+}
+
+.dark-mode .deleteBtn {
+  background: var(--gray-100);
+  color: var(--primary-red);
+  border-color: var(--primary-red);
+}
+
+.dark-mode .modal {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .passwordRequirements {
+  background: var(--gray-100);
+}
+
+.dark-mode .hamburgerLine {
+  background: var(--primary-purple);
+}
+
+.dark-mode .hamburgerActive .hamburgerLine {
+  background: var(--primary-red);
+}
+
+/* Responsive adjustments for theme toggle */
+@media (max-width: 768px) {
+  .navHeaderRight {
+    gap: 0.25rem;
+  }
+  
+  .toggleTrack {
+    width: 2.5rem;
+    height: 1.25rem;
+  }
+  
+  .toggleThumb {
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.7rem;
+  }
+  
+  .toggleThumbDark {
+    transform: translateX(1.25rem);
+  }
+}

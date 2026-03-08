@@ -2,6 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 import styles from "../styles/App.module.css";
 
 const Navbar = () => {
@@ -31,16 +32,21 @@ const Navbar = () => {
             📋 Mini CRM
           </Link>
 
-          {/* Hamburger Menu Button */}
-          <button
-            className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerActive : ""}`}
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            <span className={styles.hamburgerLine}></span>
-            <span className={styles.hamburgerLine}></span>
-            <span className={styles.hamburgerLine}></span>
-          </button>
+          <div className={styles.navHeaderRight}>
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Hamburger Menu Button */}
+            <button
+              className={`${styles.hamburger} ${isMenuOpen ? styles.hamburgerActive : ""}`}
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+              <span className={styles.hamburgerLine}></span>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
