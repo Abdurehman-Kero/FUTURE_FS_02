@@ -2,9 +2,13 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const authRoutes = require("./routes/authRoutes");  
+
 // Import routes
 const leadRoutes = require("./routes/leadRoutes");
+const authRoutes = require("./routes/authRoutes");
+
+// Import error handler
+const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
 
@@ -17,13 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/test", (req, res) => {
   res.json({ message: "CRM Backend is running!" });
 });
-
-// Use routes
-app.use("/api/auth", authRoutes); // NEW - Authentication routes
-
+// Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/leads", leadRoutes);
 
-// 404 handler for routes that don't exist - FIXED: removed the "*"
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -31,6 +33,8 @@ app.use((req, res) => {
   });
 });
 
+// Error handler (should be last)
+app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 // Start server
