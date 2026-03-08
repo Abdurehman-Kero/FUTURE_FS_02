@@ -5,23 +5,15 @@ const jwt = require("jsonwebtoken");
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d", // Token expires in 30 days
+    expiresIn: "30d",
   });
 };
 
 // @desc    Register a new admin
 // @route   POST /api/auth/register
-const registerAdmin = async (req, res) => {
+const registerAdmin = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-
-    // Validation
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide name, email and password",
-      });
-    }
 
     // Check if admin already exists
     const existingAdmin = await Admin.findByEmail(email);
@@ -35,6 +27,9 @@ const registerAdmin = async (req, res) => {
     // Create admin
     const adminId = await Admin.create({ name, email, password });
 
+    // Get the created admin
+    const newAdmin = await Admin.findById(adminId);
+
     // Generate token
     const token = generateToken(adminId);
 
@@ -42,35 +37,22 @@ const registerAdmin = async (req, res) => {
       success: true,
       message: "Admin created successfully",
       data: {
-        id: adminId,
-        name,
-        email,
+        id: newAdmin.id,
+        name: newAdmin.name,
+        email: newAdmin.email,
         token,
       },
     });
   } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Error registering admin",
-      error: error.message,
-    });
+    next(error);
   }
 };
 
 // @desc    Login admin
 // @route   POST /api/auth/login
-const loginAdmin = async (req, res) => {
+const loginAdmin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-
-    // Validation
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide email and password",
-      });
-    }
 
     // Check if admin exists
     const admin = await Admin.findByEmail(email);
@@ -107,16 +89,26 @@ const loginAdmin = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Error logging in",
-      error: error.message,
+    next(error);
+  }
+};
+
+// @desc    Get current admin profile
+// @route   GET /api/auth/me
+const getMe = async (req, res, next) => {
+  try {
+    // req.admin is set by the protect middleware
+    res.status(200).json({
+      success: true,
+      data: req.admin,
     });
+  } catch (error) {
+    next(error);
   }
 };
 
 module.exports = {
   registerAdmin,
   loginAdmin,
+  getMe,
 };
