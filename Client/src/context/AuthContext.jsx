@@ -1,4 +1,4 @@
-// src/context/AuthContext.jsx
+// src/context/AuthContext.jsx - Remove register related code
 import { createContext, useState, useContext, useEffect } from "react";
 import { authAPI } from "../services/api";
 
@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Check if user is logged in on initial load
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -23,7 +22,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Load user data
   const loadUser = async () => {
     try {
       const response = await authAPI.getMe();
@@ -36,13 +34,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Login function
   const login = async (email, password) => {
     try {
       setError(null);
       const response = await authAPI.login({ email, password });
 
-      // Save token and user data
       localStorage.setItem("token", response.data.data.token);
       setUser(response.data.data);
 
@@ -53,24 +49,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Register function
-  const register = async (name, email, password) => {
-    try {
-      setError(null);
-      const response = await authAPI.register({ name, email, password });
+  // Register function removed - only super admins can create new admins via backend
 
-      // Save token and user data
-      localStorage.setItem("token", response.data.data.token);
-      setUser(response.data.data);
-
-      return { success: true };
-    } catch (error) {
-      setError(error.response?.data?.message || "Registration failed");
-      return { success: false, error: error.response?.data?.message };
-    }
-  };
-
-  // Logout function
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
@@ -81,7 +61,6 @@ export const AuthProvider = ({ children }) => {
     loading,
     error,
     login,
-    register,
     logout,
   };
 
